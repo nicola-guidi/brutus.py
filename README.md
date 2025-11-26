@@ -16,9 +16,12 @@ It is activated when a username and password are specified:
 python3 brutus.py -i 192.168.1.10 -u admin -p admin123
 ```
 ### 2. Dictionary / Cluster Bomb Attack  
+
 *(Username list × Password list)*
+
 This mode performs a complete attack by combining **every username** with **every password**.  
 It is the most effective mode when you want to test many credentials.
+
 It is activated when wordlists are provided via:
 - `-U <file>` — username list  
 - `-P <file>` — password list  
@@ -31,6 +34,7 @@ python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt
 ### 3. Password Spraying Attack  
 In this mode, **a single password** is used for all usernames in the wordlist.  
 It is useful when you want to avoid lockouts due to too many failed attempts on the same user.
+
 The mode is activated when the following are specified:
 - `-U <file>` — username list  
 - `-p <password>` — single password
