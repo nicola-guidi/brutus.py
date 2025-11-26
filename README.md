@@ -1,9 +1,10 @@
 # Brutus.py
-Brutus.py is a tool designed to test the security of SSH services through different attack modes based on username and password combinations. The program allows both direct use of single credentials and the use of wordlists to automatically generate all possible combinations.  
-The goal is to provide a simple and controlled method to verify the robustness of an SSH service in an authorized context.
+Brutus.py is a tool designed to test the security of SSH services through different attack modes based on username and password combinations. The program allows both direct use of single credentials and the use of wordlists to automatically generate all possible combinations.   The goal is to provide a simple and controlled method to verify the robustness of an SSH service in an authorized context.
 ## Supported attack modes
 Brutus.py automatically recognizes the attack mode based on the parameters provided. The implemented modes are as follows:
+
 ![gif_example](./Media/poc.gif)
+
 ### 1. Single credentials  
 The simplest mode: only one attempt is made.
 It is activated when a username and password are specified:
