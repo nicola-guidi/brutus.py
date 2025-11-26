@@ -3,7 +3,7 @@ Brutus.py is a tool designed to test the security of SSH services through differ
 ## Supported attack modes
 Brutus.py automatically recognizes the attack mode based on the parameters provided. The implemented modes are as follows:
 
-![gif_example](./Media/poc.gif)
+![gif_example](./media/dontstop.gif)
 
 ### 1. Single credentials  
 The simplest mode: only one attempt is made.
