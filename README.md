@@ -10,6 +10,7 @@ The simplest mode: only one attempt is made.
 It is activated when a username and password are specified:
 - `-u <username>`
 - `-p <password>`
+
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.10 -u admin -p admin123
@@ -22,6 +23,7 @@ It is activated when wordlists are provided via:
 - `-U <file>` — username list  
 - `-P <file>` — password list  
 In this case, Brutus.py automatically builds all possible combinations.
+
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt
@@ -32,6 +34,7 @@ It is useful when you want to avoid lockouts due to too many failed attempts on 
 The mode is activated when the following are specified:
 - `-U <file>` — username list  
 - `-p <password>` — single password
+
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.20 -U users.txt -p admin123
