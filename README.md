@@ -24,7 +24,8 @@ It is the most effective mode when you want to test many credentials.
 
 It is activated when wordlists are provided via:
 - `-U <file>` — username list  
-- `-P <file>` — password list  
+- `-P <file>` — password list
+  
 In this case, Brutus.py automatically builds all possible combinations.
 
 **Example:**
@@ -46,27 +47,34 @@ python3 brutus.py -i 192.168.1.20 -U users.txt -p admin123
 ## Error handling and input validation
 The program includes a validation system designed to catch errors before execution.  
 In particular, the following are handled:
+
 - **IP address validity**, via the `ipaddress` module
 - **Port validity**, which must be numeric and between **1 and 65535**
 - **File existence** (for userlist and passlist)
 - **Prevention of confusion between files and strings**, avoiding misinterpretation
+  
 ## Usage examples
+
 ### • Single username + passlist
 ```bash
 python3 brutus.py -i 192.168.1.10 -u admin -P passwords.txt
 ```
+
 ### • User wordlist + single password (password spraying)
 ```bash
 python3 brutus.py -i 192.168.1.10 -U users.txt -p admin123
 ```
+
 ### • Cluster-bomb attack
 ```bash
 python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt
 ```
+
 ### • Continue even after valid credentials are found
 ```bash
 python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt --dont-stop
 ```
+
 ## Available options
 - `-i, --ip` → Target IP address  
 - `-s, --service` → SSH port (default: 22)  
@@ -75,6 +83,8 @@ python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt --dont-stop
 - `-U, --userlist` → File containing username list  
 - `-P, --passlist` → File containing password list  
 - `--dont-stop` → Does not stop the attack if valid credentials are found
-> ⚠️ **Warning**  
+  
+> ⚠️ **Warning**
+
 > The use of this tool is permitted exclusively on systems for which you have explicit authorization.  
 > The author is not responsible for any improper or illegal use.
