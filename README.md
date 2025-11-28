@@ -1,94 +1,253 @@
 # Brutus.py
-Brutus.py is a tool designed to test the security of SSH services through different attack modes based on username and password combinations. The program allows both direct use of single credentials and the use of wordlists to automatically generate all possible combinations.   The goal is to provide a simple and controlled method to verify the robustness of an SSH service in an authorized context.
 
-## Supported attack modes
-Brutus.py automatically recognizes the attack mode based on the parameters provided. The implemented modes are as follows:
+```
+██████╗ ██████╗ ██╗   ██╗████████╗██╗   ██╗███████╗   ██████╗ ██╗   ██╗
+██╔══██╗██╔══██╗██║   ██║╚══██╔══╝██║   ██║██╔════╝   ██╔══██╗╚██╗ ██╔╝
+██████╔╝██████╔╝██║   ██║   ██║   ██║   ██║███████╗   ██████╔╝ ╚████╔╝ 
+██╔══██╗██╔══██╗██║   ██║   ██║   ██║   ██║╚════██║   ██╔═══╝   ╚██╔╝  
+██████╔╝██║  ██║╚██████╔╝   ██║   ╚██████╔╝███████║██╗██║        ██║   
+╚═════╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚══════╝╚═╝╚═╝        ╚═╝   
+```
+
+A Python-based SSH security testing tool with support for multiple attack modes, designed for authorized penetration testing and security assessments.
+
+## ⚠️ Legal Disclaimer
+
+**This tool is intended for ethical and authorized security testing only.** 
+
+The author assumes no responsibility for any misuse of this software. Testing SSH services or any systems without explicit authorization is illegal and may result in criminal or civil penalties. Always ensure you have proper permission before conducting any security assessments.
+
+## 🔍 Overview
+
+Brutus.py is an asynchronous SSH brute-force testing tool that helps security professionals verify the robustness of SSH credentials. It automatically recognizes the attack mode based on provided parameters and supports multiple testing strategies, from single credential verification to comprehensive dictionary attacks.
 
 ![gif_example](./media/poc.gif)
 
-### 1. Single credentials  
-The simplest mode: only one attempt is made.
-It is activated when a username and password are specified:
-- `-u <username>`
-- `-p <password>`
+## ✨ Key Features
+
+- **Multiple Attack Modes**: Automatically adapts to single credentials, password spraying, or cluster bomb attacks
+- **Asynchronous Architecture**: Fast and efficient testing using Python's asyncio
+- **Intelligent Mode Detection**: Automatically selects the appropriate attack strategy based on input
+- **Custom Port Support**: Test SSH services running on non-standard ports
+- **Continuous Search Mode**: Option to continue testing after finding valid credentials
+- **Color-Coded Output**: Visual feedback with green for valid credentials and red for invalid ones
+- **Robust Validation**: Comprehensive input checking for IP addresses, ports, and file paths
+- **Timeout Protection**: Built-in connection timeout handling to prevent hanging
+
+## 📋 Requirements
+
+- Python 3.7+
+- asyncssh library
+
+## 🚀 Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/brutus.py.git
+cd brutus.py
+```
+
+2. Install required dependencies:
+```bash
+pip install asyncssh
+```
+
+## 🎯 Attack Modes
+
+Brutus.py automatically recognizes and implements different attack modes based on the parameters you provide:
+
+### 1. Single Credential Test
+
+The simplest mode where only one authentication attempt is made. Perfect for verifying a specific username/password combination.
+
+**Activated when:**
+- `-u <username>` (single username)
+- `-p <password>` (single password)
 
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.10 -u admin -p admin123
 ```
 
-### 2. Dictionary / Cluster Bomb Attack  
+### 2. Cluster Bomb Attack (Dictionary Attack)
 
-*(Username list × Password list)*
+This mode performs a comprehensive attack by testing every username against every password, generating all possible combinations. Most effective when you want to test multiple credentials systematically.
 
-This mode performs a complete attack by combining **every username** with **every password**.  
-It is the most effective mode when you want to test many credentials.
-
-It is activated when wordlists are provided via:
-- `-U <file>` — username list  
-- `-P <file>` — password list
-  
-In this case, Brutus.py automatically builds all possible combinations.
+**Activated when:**
+- `-U <file>` (username wordlist)
+- `-P <file>` (password wordlist)
 
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt
 ```
 
-### 3. Password Spraying Attack  
-In this mode, **a single password** is used for all usernames in the wordlist.  
-It is useful when you want to avoid lockouts due to too many failed attempts on the same user.
+**Attack Pattern:** If you have 10 usernames and 100 passwords, this will perform 1,000 total attempts (10 × 100).
 
-The mode is activated when the following are specified:
-- `-U <file>` — username list  
-- `-p <password>` — single password
+### 3. Password Spraying Attack
+
+This mode uses a single password across all usernames in a wordlist. Particularly useful for avoiding account lockouts, as it limits failed attempts per user.
+
+**Activated when:**
+- `-U <file>` (username wordlist)
+- `-p <password>` (single password)
 
 **Example:**
 ```bash
 python3 brutus.py -i 192.168.1.20 -U users.txt -p admin123
 ```
 
-## Error handling and input validation
-The program includes a validation system designed to catch errors before execution.  
-In particular, the following are handled:
+**Use Case:** Ideal when testing common passwords like "Password123" or "Summer2024" against multiple accounts without triggering security lockouts.
 
-- **IP address validity**, via the `ipaddress` module
-- **Port validity**, which must be numeric and between **1 and 65535**
-- **File existence** (for userlist and passlist)
-- **Prevention of confusion between files and strings**, avoiding misinterpretation
-  
-## Usage examples
+### 4. Single Username + Password List
 
-### • Single username + passlist
+Test multiple passwords against a single username. Useful when targeting a specific account.
+
+**Activated when:**
+- `-u <username>` (single username)
+- `-P <file>` (password wordlist)
+
+**Example:**
 ```bash
 python3 brutus.py -i 192.168.1.10 -u admin -P passwords.txt
 ```
 
-### • User wordlist + single password (password spraying)
+## 💻 Usage
+
+### Basic Syntax
+
 ```bash
-python3 brutus.py -i 192.168.1.10 -U users.txt -p admin123
+python3 brutus.py -i [TARGET IP] [OPTIONS]
 ```
 
-### • Cluster-bomb attack
+### Command-Line Arguments
+
+| Argument | Short | Description |
+|----------|-------|-------------|
+| `--ip <IP address>` | `-i` | Target IP address (required) |
+| `--service <port>` | `-s` | Target SSH port (default: 22) |
+| `--username <username>` | `-u` | Single username to test |
+| `--password <password>` | `-p` | Single password to test |
+| `--userlist <file>` | `-U` | Path to username wordlist |
+| `--passlist <file>` | `-P` | Path to password wordlist |
+| `--dont-stop` | | Continue testing even after finding valid credentials |
+
+### Complete Usage Examples
+
+**Test a single credential:**
 ```bash
-python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt
+python3 brutus.py -i 192.168.1.100 -u admin -p password123
 ```
 
-### • Continue even after valid credentials are found
+**Cluster bomb attack with wordlists:**
 ```bash
-python3 brutus.py -i 192.168.1.10 -U users.txt -P passwords.txt --dont-stop
+python3 brutus.py -i 192.168.1.100 -U users.txt -P passwords.txt
 ```
 
-## Available options
-- `-i, --ip` → Target IP address  
-- `-s, --service` → SSH port (default: 22)  
-- `-u, --username` → Single username  
-- `-p, --password` → Single password  
-- `-U, --userlist` → File containing username list  
-- `-P, --passlist` → File containing password list  
-- `--dont-stop` → Does not stop the attack if valid credentials are found
-  
-> ⚠️ **Warning**
->
-> The use of this tool is permitted exclusively on systems for which you have explicit authorization.  
-> The author is not responsible for any improper or illegal use.
+**Password spraying to avoid lockouts:**
+```bash
+python3 brutus.py -i 192.168.1.100 -U users.txt -p Winter2024!
+```
+
+**Test multiple passwords on one account:**
+```bash
+python3 brutus.py -i 192.168.1.100 -u root -P passwords.txt
+```
+
+**Custom SSH port with dictionary attack:**
+```bash
+python3 brutus.py -i 192.168.1.100 -s 2222 -U users.txt -P passwords.txt
+```
+
+**Continue searching after finding valid credentials:**
+```bash
+python3 brutus.py -i 192.168.1.100 -U users.txt -P passwords.txt --dont-stop
+```
+
+## 📝 Wordlist Format
+
+Wordlist files should contain one entry per line with no extra formatting:
+
+**users.txt example:**
+```
+admin
+root
+user
+testuser
+administrator
+```
+
+**passwords.txt example:**
+```
+password123
+admin
+letmein
+Password2024!
+```
+
+## 🎨 Output Examples
+
+The tool provides color-coded feedback for easy result interpretation:
+
+```
+[-] Testing password "wrongpass" for the user "admin" - Invalid password!
+[-] Testing password "12345" for the user "admin" - Invalid password!
+[+] Testing password "admin123" for the user "admin" - Valid password!
+```
+
+- **🟢 Green**: Valid credentials found
+- **🔴 Red**: Invalid credentials
+- **🟡 Yellow**: Warnings and connection errors
+
+## 🛡️ Input Validation & Error Handling
+
+Brutus.py includes comprehensive validation to catch errors before execution:
+
+- **IP Address Validation**: Uses Python's `ipaddress` module to ensure valid IPv4/IPv6 addresses
+- **Port Validation**: Ensures ports are numeric and within the valid range (1-65535)
+- **File Existence Check**: Verifies wordlist files exist before attempting to read them
+- **String vs File Prevention**: Prevents accidental use of filenames as credentials
+- **Connection Timeout Handling**: Gracefully handles network timeouts and connection failures
+- **Keyboard Interrupt**: Clean exit when user stops the program with Ctrl+C
+
+## ⚡ Performance Considerations
+
+- The tool uses asynchronous connections for improved performance
+- Default timeout is 10 seconds per connection attempt
+- Large wordlists may take considerable time depending on network conditions
+- Consider network bandwidth and target system load when planning attacks
+
+## 🔒 Best Practices for Security Testing
+
+1. **Always obtain written authorization** before testing any system
+2. **Document all testing activities** and maintain proper records
+3. **Use password spraying** when concerned about account lockouts
+4. **Respect rate limiting** and avoid overwhelming target systems
+5. **Test in isolated environments** when possible
+6. **Follow responsible disclosure** practices for any vulnerabilities found
+7. **Keep wordlists updated** with current password trends and patterns
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. Areas where contributions would be particularly helpful:
+
+- Additional attack modes
+- Performance optimizations
+- Enhanced output formatting
+- Additional error handling scenarios
+
+## 📄 License
+
+This project is provided for educational and ethical security testing purposes only.
+
+## 👤 Author
+
+Created by **p3qu0dd**
+
+## 🙏 Acknowledgments
+
+Built with the asyncssh library for efficient asynchronous SSH connections.
+
+---
+
+**Remember**: Ethical hacking requires responsibility, authorization, and respect for the law. Use this tool only on systems you own or have explicit permission to test.
