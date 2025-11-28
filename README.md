@@ -41,7 +41,7 @@ Brutus.py is an asynchronous SSH brute-force testing tool that helps security pr
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/brutus.py.git
+git clone https://github.com/nicola-guidi/brutus.py.git
 cd brutus.py
 ```
 
