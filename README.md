@@ -44,8 +44,12 @@ Brutus.py is an asynchronous SSH brute-force testing tool that helps security pr
 git clone https://github.com/nicola-guidi/brutus.py.git
 cd brutus.py
 ```
-
-2. Install required dependencies:
+2. Create a and initialize Python virtual envirnoment:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+3. Install required dependencies:
 ```bash
 pip install asyncssh
 ```
