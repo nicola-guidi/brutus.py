@@ -166,59 +166,6 @@ python3 brutus.py -i 192.168.1.100 -s 2222 -U users.txt -P passwords.txt
 python3 brutus.py -i 192.168.1.100 -U users.txt -P passwords.txt --dont-stop
 ```
 
-## 📝 Wordlist Format
-
-Wordlist files should contain one entry per line with no extra formatting:
-
-**users.txt example:**
-```
-admin
-root
-user
-testuser
-administrator
-```
-
-**passwords.txt example:**
-```
-password123
-admin
-letmein
-Password2024!
-```
-
-## 🎨 Output Examples
-
-The tool provides color-coded feedback for easy result interpretation:
-
-```
-[-] Testing password "wrongpass" for the user "admin" - Invalid password!
-[-] Testing password "12345" for the user "admin" - Invalid password!
-[+] Testing password "admin123" for the user "admin" - Valid password!
-```
-
-- **🟢 Green**: Valid credentials found
-- **🔴 Red**: Invalid credentials
-- **🟡 Yellow**: Warnings and connection errors
-
-## 🛡️ Input Validation & Error Handling
-
-Brutus.py includes comprehensive validation to catch errors before execution:
-
-- **IP Address Validation**: Uses Python's `ipaddress` module to ensure valid IPv4/IPv6 addresses
-- **Port Validation**: Ensures ports are numeric and within the valid range (1-65535)
-- **File Existence Check**: Verifies wordlist files exist before attempting to read them
-- **String vs File Prevention**: Prevents accidental use of filenames as credentials
-- **Connection Timeout Handling**: Gracefully handles network timeouts and connection failures
-- **Keyboard Interrupt**: Clean exit when user stops the program with Ctrl+C
-
-## ⚡ Performance Considerations
-
-- The tool uses asynchronous connections for improved performance
-- Default timeout is 10 seconds per connection attempt
-- Large wordlists may take considerable time depending on network conditions
-- Consider network bandwidth and target system load when planning attacks
-
 ## 🔒 Best Practices for Security Testing
 
 1. **Always obtain written authorization** before testing any system
@@ -240,16 +187,12 @@ Contributions are welcome! Please feel free to submit a Pull Request. Areas wher
 
 ## 📄 License
 
-This project is provided for educational and ethical security testing purposes only.
+This project is provided for educational and ethical security testing purposes only. Ethical hacking requires responsibility, authorization, and respect for the law. Use this tool only on systems you own or have explicit permission to test.
 
 ## 👤 Author
 
-Created by **p3qu0dd**
+Created by **Nicola Guidi**
 
 ## 🙏 Acknowledgments
 
 Built with the asyncssh library for efficient asynchronous SSH connections.
-
----
-
-**Remember**: Ethical hacking requires responsibility, authorization, and respect for the law. Use this tool only on systems you own or have explicit permission to test.
