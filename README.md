@@ -9,19 +9,19 @@
 
 A Python-based SSH security testing tool with support for multiple attack modes, designed for authorized penetration testing and security assessments.
 
-## ⚠️ Legal Disclaimer
+## Legal Disclaimer
 
 **This tool is intended for ethical and authorized security testing only.** 
 
 The author assumes no responsibility for any misuse of this software. Testing SSH services or any systems without explicit authorization is illegal and may result in criminal or civil penalties. Always ensure you have proper permission before conducting any security assessments.
 
-## 🔍 Overview
+## Overview
 
 Brutus.py is an asynchronous SSH brute-force testing tool that helps security professionals verify the robustness of SSH credentials. It automatically recognizes the attack mode based on provided parameters and supports multiple testing strategies, from single credential verification to comprehensive dictionary attacks.
 
 ![gif_example](./media/poc.gif)
 
-## ✨ Key Features
+## Key Features
 
 - **Multiple Attack Modes**: Automatically adapts to single credentials, password spraying, or cluster bomb attacks
 - **Asynchronous Architecture**: Fast and efficient testing using Python's asyncio
@@ -32,12 +32,12 @@ Brutus.py is an asynchronous SSH brute-force testing tool that helps security pr
 - **Robust Validation**: Comprehensive input checking for IP addresses, ports, and file paths
 - **Timeout Protection**: Built-in connection timeout handling to prevent hanging
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.7+
 - asyncssh library
 
-## 🚀 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -54,7 +54,7 @@ source venv/bin/activate
 pip install asyncssh
 ```
 
-## 🎯 Attack Modes
+## Attack Modes
 
 Brutus.py automatically recognizes and implements different attack modes based on the parameters you provide:
 
@@ -114,7 +114,7 @@ Test multiple passwords against a single username. Useful when targeting a speci
 python3 brutus.py -i 192.168.1.10 -u admin -P passwords.txt
 ```
 
-## 💻 Usage
+## Usage
 
 ### Basic Syntax
 
@@ -166,7 +166,7 @@ python3 brutus.py -i 192.168.1.100 -s 2222 -U users.txt -P passwords.txt
 python3 brutus.py -i 192.168.1.100 -U users.txt -P passwords.txt --dont-stop
 ```
 
-## 🔒 Best Practices for Security Testing
+## Best Practices for Security Testing
 
 1. **Always obtain written authorization** before testing any system
 2. **Document all testing activities** and maintain proper records
@@ -176,7 +176,7 @@ python3 brutus.py -i 192.168.1.100 -U users.txt -P passwords.txt --dont-stop
 6. **Follow responsible disclosure** practices for any vulnerabilities found
 7. **Keep wordlists updated** with current password trends and patterns
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. Areas where contributions would be particularly helpful:
 
@@ -185,14 +185,14 @@ Contributions are welcome! Please feel free to submit a Pull Request. Areas wher
 - Enhanced output formatting
 - Additional error handling scenarios
 
-## 📄 License
+## License
 
 This project is provided for educational and ethical security testing purposes only. Ethical hacking requires responsibility, authorization, and respect for the law. Use this tool only on systems you own or have explicit permission to test.
 
-## 👤 Author
+## Author
 
 Created by **Nicola Guidi**
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 Built with the asyncssh library for efficient asynchronous SSH connections.
