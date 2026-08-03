@@ -17,7 +17,7 @@ print('\033[31m██████╔╝██║  ██║╚██████
 print('\033[31m╚═════╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚══════╝╚═╝╚═╝        ╚═╝\033[0m  - version 1.0')   
 print('')
 print('Brutus.py is a tool designed for security testing of SSH services. It allows users to test a single username and/or password, ')
-print('or use wordlists for usernames and passwords to perform cluster bomb-style attacks - Created by nick_gu')
+print('or use wordlists for usernames and passwords to perform cluster bomb-style attacks - Created by Nicola Guidi')
 print('')
 print('--------------------------------------------------------------------------------------------------------------------------------------')
 print('')
